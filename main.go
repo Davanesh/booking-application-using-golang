@@ -3,28 +3,40 @@ package main
 import "fmt"
 
 func main() {
-	var totalTickets int = 50
-	var userFirstName string
-	var userLastName string
-	var userEmail string
-	var userTickets int
+	var totalTickets uint = 50
+	var bookings []string
 
-	fmt.Println("Welcome to booking application")
-	fmt.Println("You can book tickets here")
-	fmt.Printf("Total tickets available: %v\n", totalTickets)
+	fmt.Println("🎟️  Welcome to GoTicket — The Simplest Booking App Ever!")
+	fmt.Println("---------------------------------------------------------")
+	fmt.Printf("We’ve got a total of %v tickets available right now!\n\n", totalTickets)
 
-	fmt.Print("Enter your first name: ")
+	var userFirstName, userLastName, userEmail string
+	var userTickets uint
+
+	fmt.Print("👉 Enter your first name: ")
 	fmt.Scan(&userFirstName)
-	fmt.Print("Enter your last name: ")
-	fmt.Scan(&userLastName)
-	var userName string = userFirstName + " " + userLastName 
 
-	fmt.Print("Enter your email ID name: ")
+	fmt.Print("👉 Enter your last name: ")
+	fmt.Scan(&userLastName)
+
+	fmt.Print("📧 Enter your email ID: ")
 	fmt.Scan(&userEmail)
-	
-	fmt.Print("Enter number of tickets: ")
+
+	fmt.Print("🎫 How many tickets do you want to book? ")
 	fmt.Scan(&userTickets)
 
+	if(userTickets > totalTickets) {
+		fmt.Printf("Sorry %v, only %v tickets are left! Try a smaller number.\n", userFirstName, totalTickets)
+		return
+	}
+
 	totalTickets -= userTickets
-	fmt.Printf("Thanks %v, Your ticket has been sent to %v :)", userName, userEmail)
+
+	userName := userFirstName + " " + userLastName
+	bookings = append(bookings, userName)
+
+	fmt.Printf("\n✅ Thanks %v! Your booking for %v ticket(s) is confirmed.\n", userName, userTickets)
+	fmt.Printf("🎟️  A confirmation email has been sent to: %v\n", userEmail)
+	fmt.Printf("📉 Tickets remaining: %v\n\n", totalTickets)
+
 }
